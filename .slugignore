@@ -1,5 +1,4 @@
 # Ignore the following files
-*.h5            # Exclude model files
 *.log           # Exclude log files
 *.tmp           # Temporary files
 node_modules/   # If using Node.js dependencies
