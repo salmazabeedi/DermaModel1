@@ -1,3 +1,10 @@
-*.h5
-*.dll
-*.pyd
+# Ignore the following files
+*.h5            # Exclude model files
+*.log           # Exclude log files
+*.tmp           # Temporary files
+node_modules/   # If using Node.js dependencies
+.git/           # Exclude Git repository files
+.venv/          # Exclude virtual environment directory
+.idea/          # If using IDE like PyCharm
+.vscode/        # If using VSCode
+.DS_Store       # macOS system files
