@@ -60,6 +60,12 @@ def predict():
         'predicted_label': predicted_label,
         'confidence': float(prediction_confidence)  # Return confidence
     })
+    
+@app.route('/')
+def index():
+      return "DermaAware Skin Model"  
+    
+
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 5590)))
