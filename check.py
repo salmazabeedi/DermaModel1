@@ -6,9 +6,30 @@ from PIL import Image
 import io
 import base64
 import os
+import boto3
+from botocore.exceptions import NoCredentialsError
+
+# AWS S3 Configuration
+S3_BUCKET = 'skinmodel'  # Your S3 bucket name
+MODEL_FILE_NAME = 'SkinModelWork.h5'  # Name of the model file in S3
+LOCAL_MODEL_PATH = '/tmp/SkinModelWork.h5'  # Path to save the model temporarily
+
+# Function to download the model from S3
+def download_model_from_s3():
+    s3 = boto3.client('s3')
+    try:
+        # Download the model from S3 to local disk
+        s3.download_file(S3_BUCKET, MODEL_FILE_NAME, LOCAL_MODEL_PATH)
+        print(f"Downloaded model {MODEL_FILE_NAME} from S3.")
+    except NoCredentialsError:
+        print("Credentials not available for S3.")
+        raise
+
+# Download model at the start of the app
+download_model_from_s3()
 
 # Load the trained model
-model = tf.keras.models.load_model('SkinModelWork.h5')
+model = tf.keras.models.load_model(LOCAL_MODEL_PATH)
 
 # Define label mapping
 label_mapping = {0: 'Melanocytic Nevi', 1: 'Melanoma', 2: 'Benign Keratosis', 3: 'Basal Cell Carcinoma', 4: 'Actinic Keratosi', 5: 'Vascular Lesion', 6: 'Dermatofibroma'}
