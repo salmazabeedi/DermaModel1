@@ -8,7 +8,7 @@ import base64
 import os
 
 # Load the trained model
-model = tf.keras.models.load_model('SkinModelWork.h5')
+model = tf.keras.models.load_model('models/SkinModelWork.h5')
 
 # Define label mapping
 label_mapping = {0: 'Melanocytic Nevi', 1: 'Melanoma', 2: 'Benign Keratosis', 3: 'Basal Cell Carcinoma', 4: 'Actinic Keratosi', 5: 'Vascular Lesion', 6: 'Dermatofibroma'}
