@@ -97,15 +97,18 @@ def predict():
         return jsonify({'error': 'Model is not loaded'}), 500
 
     # Make prediction
-    predictions = model.predict(image_data)
-    predicted_class = np.argmax(predictions, axis=-1)[0]
-    predicted_label = label_mapping[predicted_class]
-    prediction_confidence = np.max(predictions)  # Get confidence of the prediction
+    try:
+        predictions = model.predict(image_data)
+        predicted_class = np.argmax(predictions, axis=-1)[0]
+        predicted_label = label_mapping[predicted_class]
+        prediction_confidence = np.max(predictions)  # Get confidence of the prediction
 
-    return jsonify({
-        'predicted_label': predicted_label,
-        'confidence': float(prediction_confidence)  # Return confidence
-    })
+        return jsonify({
+            'predicted_label': predicted_label,
+            'confidence': float(prediction_confidence)  # Return confidence
+        })
+    except Exception as e:
+        return jsonify({'error': f'Error during prediction: {str(e)}'}), 500
     
 # Basic index route for testing
 @app.route('/')
